@@ -10,11 +10,11 @@ AfterShipDelegate
 AfterShipApi *aft = [[AfterShipApi alloc]init];
 aft.delegate = self;
 
-4 (1) get
+4.  (1) get
 [aft trackingsGetRequest:TEST_API_KEY];
 
-4 (2) post
+4.  (2) post
 [aft trackingsPostRequest:TEST_TRACKING_NUMBER ApiKey:TEST_API_KEY];
 
-5. get the response
+5.  get the response
 (void)AfterShipFinishedRequest:(NSData*)responseData response:(NSURLResponse *)response
