@@ -62,7 +62,7 @@
     aft = [[AfterShipApi alloc]init];
     aft.delegate = self;
     
-    //注册键盘弹起与收起通知
+   
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(BasicRegkeyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -72,7 +72,8 @@
                                              selector:@selector(BasicRegkeyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    //隐藏键盘
+   
+    
     UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     tapGr.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGr];
@@ -208,10 +209,10 @@
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     NSLog(@"Drive_Height-keyboardSize.height-48 (%f)",self.view.frame.size.height - keyboardSize.height - 48);
     
-    //自适应代码（输入法改变也可随之改变）
+ 
     if((self.view.frame.size.height - keyboardSize.height - 48)<textHeight)
     {
-        [UIView beginAnimations:nil context:NULL];//此处添加动画，使之变化平滑一点
+        [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         self.view.frame = CGRectMake(0.0f, -(textHeight-(self.view.frame.size.height-keyboardSize.height-48)), self.view.frame.size.width, self.view.frame.size.height);
         [UIView commitAnimations];
@@ -226,8 +227,7 @@
     
     if((self.view.frame.size.height-keyboardSize.height-48)<textHeight)
     {
-        //还原
-        [UIView beginAnimations:nil context:NULL];//此处添加动画，使之变化平滑一点
+        [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         self.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
         [UIView commitAnimations];
