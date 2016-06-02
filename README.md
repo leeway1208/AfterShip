@@ -6,7 +6,7 @@ import "AfterShipApi.h"
 2. Set Delegate
 AfterShipDelegate
 
-3. Initialize
+3. Initialize 
 AfterShipApi *aft = [[AfterShipApi alloc]init];
 aft.delegate = self;
 
