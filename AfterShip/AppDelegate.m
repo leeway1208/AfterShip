@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "TestViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,60 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //获取当前系统版本号
+    NSString * version = [[UIDevice currentDevice] systemVersion];
+    
+    NSArray *array = [version componentsSeparatedByString:@"."];
+    float systemVersion=[[NSString stringWithFormat:@"%@.%@",[array objectAtIndex:0],[array objectAtIndex:1]]doubleValue];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    
+    //    //set init view
+    TestViewController *welcome = [[TestViewController alloc] init];
+    //添加NavBar
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:welcome] ; //初始化导航栏控制器
+    //  UINavigationController * navController = [[UINavigationController alloc]init] ; //初始化导航栏控制器
+    //设置navBar属性
+    if(systemVersion>=7)
+    {
+        //navBar背景颜色
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.965  green:0.965  blue:0.965 alpha:1]];
+        
+        UIColor * cc = [UIColor whiteColor];
+        NSDictionary * dict = [NSDictionary dictionaryWithObject:cc forKey:UITextAttributeTextColor];
+        //设置NavBar是否有透明
+        navController.navigationBar.translucent = NO;
+        navController.navigationBarHidden = YES;
+        //   welcome.edgesForExtendedLayout = UIRectEdgeNone;
+        navController.navigationBar.titleTextAttributes = dict;
+        //navBar字体颜色
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.212  green:0.212  blue:0.212 alpha:1]];
+        
+        
+        
+    }
+    else
+    {
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.914 green:0.267 blue:0.235 alpha:1.0f]];
+        //        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1]];
+        
+        
+    }
+    //设置NavBar的title属性（颜色和字体，字号）
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:0.212  green:0.212  blue:0.212 alpha:1], UITextAttributeTextColor,
+                                                          [UIColor colorWithRed:0.212  green:0.212  blue:0.212 alpha:1], UITextAttributeTextShadowColor,
+                                                          [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
+                                                          [UIFont fontWithName:@"Arial" size:0.0], UITextAttributeFont,
+                                                          nil]];
+    
+    self.window.rootViewController = navController;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
